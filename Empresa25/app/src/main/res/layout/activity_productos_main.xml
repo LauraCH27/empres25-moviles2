@@ -32,7 +32,6 @@
                 android:id="@+id/textView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:background="@color/Secondary_Light"
                 android:fontFamily="sans-serif-medium"
                 android:text="Productos"
@@ -45,6 +44,7 @@
                 android:id="@+id/imageView"
                 android:layout_width="400sp"
                 android:layout_height="200sp"
+                android:layout_marginTop="30dp"
                 android:background="@color/white"
                 app:srcCompat="@drawable/ic_productos" />
 
@@ -55,7 +55,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/etenombre"
+                    android:id="@+id/etnombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
@@ -97,7 +97,7 @@
                     android:enabled="false"
                     android:text="Activo"
                     android:textColor="#B96C6767"
-                    android:textSize="20dp" />
+                    android:textSize="24sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -234,6 +234,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:backgroundTint="@color/Primary_Dark2"
+                            android:onClick="Actualizarp"
                             android:text="MODIFICAR"
                             android:textColor="#DFDADA"
                             android:textSize="18sp"

@@ -28,8 +28,8 @@ import java.util.Map;
 public class UsuarioActivity extends AppCompatActivity implements Response.Listener<JSONObject>,Response.ErrorListener  {
     EditText jetusuario,jetnombre,jetclave, jetcorreo;
     CheckBox jcbactivo;
-    RequestQueue rq;
-    JsonRequest jrq;
+    RequestQueue rq, au;
+    JsonRequest jrq, aux;
     String usr,nombre,clave,correo;
     Byte sw;
     String url;
@@ -42,11 +42,12 @@ public class UsuarioActivity extends AppCompatActivity implements Response.Liste
         // inicializar la cola de cosulta
         getSupportActionBar().hide();
         jetusuario=findViewById(R.id.etusuario);
-        jetnombre=findViewById(R.id.etenombre);
+        jetnombre=findViewById(R.id.etnombre);
         jetclave=findViewById(R.id.etclave);
         jetcorreo=findViewById(R.id.etcorreo);
         jcbactivo=findViewById(R.id.cbactivo);
         rq= Volley.newRequestQueue(this);
+        au= Volley.newRequestQueue(this);
         sw=0;
 
     }
@@ -57,7 +58,7 @@ public class UsuarioActivity extends AppCompatActivity implements Response.Liste
             jetusuario.requestFocus();
         }
         else{
-            url = "http://192.168.1.5:80/WebServices/consulta.php?usr="+usr;
+            url = "http://192.168.1.2:80/WebServices/consulta.php?usr="+usr;
             jrq = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
             rq.add(jrq);
             sw=0;
@@ -73,7 +74,7 @@ public class UsuarioActivity extends AppCompatActivity implements Response.Liste
             Toast.makeText(this, "Todos los datos son requeridos", Toast.LENGTH_SHORT).show();
             jetusuario.requestFocus();
         } else{
-            url = "http://192.168.1.5:80/WebServices/registrocorreo.php";
+            url = "http://192.168.1.2:80/WebServices/registrocorreo.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>()
                     {
@@ -107,6 +108,26 @@ public class UsuarioActivity extends AppCompatActivity implements Response.Liste
 
         }
     }
+    public void Actualizar(View view){
+        usr=jetusuario.getText().toString();
+        nombre=jetnombre.getText().toString();
+        correo=jetcorreo.getText().toString();
+        clave=jetclave.getText().toString();
+        if (usr.isEmpty() || nombre.isEmpty() || correo.isEmpty() || clave.isEmpty()){
+            Toast.makeText(this, "Todos los datos son requeridos", Toast.LENGTH_SHORT).show();
+            jetusuario.requestFocus();
+        }
+
+
+        else{
+            url = "http://192.168.1.2:80/WebServices/actualiza.php?usr="+usr+"&nombre="+nombre+"&correo="+correo+"&clave="+clave+"";
+            aux = new JsonObjectRequest(Request.Method.PUT, url, null, null, null);
+            au.add(aux);
+            Toast.makeText(this, "Actualizado", Toast.LENGTH_SHORT).show();
+            Limpiar_Campos();
+
+        }
+    }
 
     public void Eliminar(View view){
         usr=jetusuario.getText().toString();
@@ -115,7 +136,7 @@ public class UsuarioActivity extends AppCompatActivity implements Response.Liste
             jetusuario.requestFocus();
         }
         else{
-            url = "http://192.168.1.5:80/WebServices/elimina.php";
+            url = "http://192.168.1.2:80/WebServices/elimina.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>()
                     {
@@ -152,7 +173,7 @@ public class UsuarioActivity extends AppCompatActivity implements Response.Liste
             jetusuario.requestFocus();
         }
         else{
-            url = "http://192.168.1.5:80/WebServices/anula.php";
+            url = "http://192.168.1.2:80/WebServices/anula.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>()
                     {

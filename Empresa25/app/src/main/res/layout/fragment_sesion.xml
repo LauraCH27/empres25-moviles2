@@ -13,11 +13,10 @@
         android:layout_height="wrap_content"
         android:background="@color/Secondary_Light"
         android:fontFamily="sans-serif-medium"
-        android:gravity="center_horizontal"
         android:text="Inicio Sesión"
         android:textAlignment="viewStart"
         android:textColor="#E4DFDF"
-        android:textSize="24sp" />
+        android:textSize="28sp" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -80,7 +79,7 @@
 
         <Button
             android:id="@+id/btingresar"
-            android:layout_width="200dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"

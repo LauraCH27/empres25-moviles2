@@ -2,13 +2,13 @@ package com.example.empresa25;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -29,8 +29,8 @@ import java.util.Map;
 public class ProductosMain<uiOptions> extends AppCompatActivity implements Response.Listener<JSONObject>,Response.ErrorListener {
     EditText jetreferencia, jetnombre, jetvalor, jetmarca, jetmodelo;
     CheckBox jbcactivo;
-    RequestQueue rq;
-    JsonRequest jrq;
+    RequestQueue rq, au;
+    JsonRequest jrq, aux;
     String ref,nombre,valor,marca,modelo;
     Byte sw;
     String url;
@@ -42,12 +42,13 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
         setContentView(R.layout.activity_productos_main);
         getSupportActionBar().hide();
         jetreferencia=findViewById(R.id.etreferencia);
-        jetnombre=findViewById(R.id.etenombre);
+        jetnombre=findViewById(R.id.etnombre);
         jetvalor=findViewById(R.id.etvalor);
         jetmarca=findViewById(R.id.etmarcas);
         jetmodelo=findViewById(R.id.etmodelo);
         jbcactivo=findViewById(R.id.cbactivo);
         rq= Volley.newRequestQueue(this);
+        au= Volley.newRequestQueue(this);
         sw=0;
 
 
@@ -60,7 +61,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
             jetreferencia.requestFocus();
         }
         else{
-            url = "http://192.168.1.5:80/WebServices/consultaproducto.php?ref="+ref;
+            url = "http://192.168.1.2:80/WebServices/consultaproducto.php?ref="+ref;
             jrq = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
             rq.add(jrq);
             sw=0;
@@ -96,6 +97,27 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
         }
 
     }
+    public void Actualizarp(View view){
+        ref=jetreferencia.getText().toString();
+        nombre=jetnombre.getText().toString();
+        valor=jetvalor.getText().toString();
+        marca=jetmarca.getText().toString();
+        modelo=jetmodelo.getText().toString();
+        if (ref.isEmpty() || nombre.isEmpty() || valor.isEmpty() || marca.isEmpty() || modelo.isEmpty()){
+            Toast.makeText(this, "Todos los datos son requeridos", Toast.LENGTH_SHORT).show();
+            jetreferencia.requestFocus();
+        }
+
+
+        else{
+            url = "http://192.168.1.2:80/WebServices/actualizaProducto.php?ref="+ref+"&nombre="+nombre+"&valor="+valor+"&marca="+marca+"&modelo="+modelo+"";
+            aux = new JsonObjectRequest(Request.Method.PUT, url, null, null, null);
+            au.add(aux);
+            Toast.makeText(this, "Actualizado", Toast.LENGTH_SHORT).show();
+            Limpiar_Campos();
+
+        }
+    }
     public void Anularp(View view){
         ref=jetreferencia.getText().toString();
         if (ref.isEmpty()){
@@ -103,7 +125,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
             jetreferencia.requestFocus();
         }
         else{
-            url = "http://192.168.1.5:80/WebServices/anulaProducto.php";
+            url = "http://192.168.1.2:80/WebServices/anulaProducto.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>()
                     {
@@ -162,7 +184,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
             Toast.makeText(this, "Todos los datos son requeridos", Toast.LENGTH_SHORT).show();
             jetreferencia.requestFocus();
         } else {
-            url = "http://192.168.1.5:80/WebServices/guardarproducto.php";
+            url = "http://192.168.1.2:80/WebServices/guardarproducto.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
