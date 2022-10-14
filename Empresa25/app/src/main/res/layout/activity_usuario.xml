@@ -41,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
+                android:hint="@string/app_name"
                 android:textSize="30dp" />
 
         </LinearLayout>
@@ -58,7 +59,7 @@
                 android:textSize="30dp" />
 
             <EditText
-                android:id="@+id/etnombre"
+                android:id="@+id/etenombre"
                 android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"

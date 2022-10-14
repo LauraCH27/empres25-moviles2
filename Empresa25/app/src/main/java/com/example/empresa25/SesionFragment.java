@@ -41,11 +41,13 @@ public class SesionFragment extends Fragment implements Response.Listener<JSONOb
         jbtingresar=vista.findViewById(R.id.btingresar);
         jtvregistrar=vista.findViewById(R.id.tvregistrar);
         jbtingresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+             @Override
+           public void onClick(View v) {
                 Iniciar_sesion();
             }
         });
+
+
         jtvregistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,7 +57,7 @@ public class SesionFragment extends Fragment implements Response.Listener<JSONOb
         rq = Volley.newRequestQueue(getContext());//requerimiento Volley
         return  vista;
     }
-    private void Iniciar_sesion(){
+   private void Iniciar_sesion(){
         String correo,clave;
         correo=jetcorreo.getText().toString();
         clave=jetclave.getText().toString();
@@ -64,7 +66,7 @@ public class SesionFragment extends Fragment implements Response.Listener<JSONOb
             jetcorreo.requestFocus();
         }
         else{
-            String url = "http://172.16.59.233:8080/WebServices/Sesion.php?correo="+correo+"&clave="+clave+"";
+            String url = "http://192.168.1.5:80/WebServices/Sesion.php?correo="+correo+"&clave="+clave;
             jrq = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
             rq.add(jrq);
         }
@@ -79,11 +81,16 @@ public class SesionFragment extends Fragment implements Response.Listener<JSONOb
 
     @Override
     public void onResponse(JSONObject response) {
+        Intent intproductos = new Intent(getContext(),ProductosMain.class);
+        startActivity((intproductos));
         Toast.makeText(getContext(), "Sesion iniciada", Toast.LENGTH_SHORT).show();
+
 
     }
     private  void Registrarse(){
         Intent intusuarios=new Intent(getContext(),UsuarioActivity.class);
         startActivity((intusuarios));
     }
+
+
 }
