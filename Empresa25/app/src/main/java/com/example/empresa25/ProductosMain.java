@@ -61,7 +61,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
             jetreferencia.requestFocus();
         }
         else{
-            url = "http://192.168.1.2:80/WebServices/consultaproducto.php?ref="+ref;
+            url = "http://172.18.69.162:80/WebServices/consultaproducto.php?ref="+ref;
             jrq = new JsonObjectRequest(Request.Method.GET,url,null,this,this);
             rq.add(jrq);
             sw=0;
@@ -110,7 +110,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
 
 
         else{
-            url = "http://192.168.1.2:80/WebServices/actualizaProducto.php?ref="+ref+"&nombre="+nombre+"&valor="+valor+"&marca="+marca+"&modelo="+modelo+"";
+            url = "http://1172.18.69.162:80/WebServices/actualizaProducto.php?ref="+ref+"&nombre="+nombre+"&valor="+valor+"&marca="+marca+"&modelo="+modelo+"";
             aux = new JsonObjectRequest(Request.Method.PUT, url, null, null, null);
             au.add(aux);
             Toast.makeText(this, "Actualizado", Toast.LENGTH_SHORT).show();
@@ -125,7 +125,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
             jetreferencia.requestFocus();
         }
         else{
-            url = "http://192.168.1.2:80/WebServices/anulaProducto.php";
+            url = "http://172.18.69.162:80/WebServices/anulaProducto.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>()
                     {
@@ -184,7 +184,7 @@ public class ProductosMain<uiOptions> extends AppCompatActivity implements Respo
             Toast.makeText(this, "Todos los datos son requeridos", Toast.LENGTH_SHORT).show();
             jetreferencia.requestFocus();
         } else {
-            url = "http://192.168.1.2:80/WebServices/guardarproducto.php";
+            url = "http://172.18.69.162:80/WebServices/guardarproducto.php";
             StringRequest postRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
                         @Override
